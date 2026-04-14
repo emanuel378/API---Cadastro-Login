@@ -1,6 +1,4 @@
 import mysql from 'mysql2'
-import dotenv from "dotenv";
-dotenv.config();
 
 const conexao = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -9,11 +7,15 @@ const conexao = mysql.createConnection({
   password: process.env.DB_PASS,
   database: process.env.DB_NAME
 });
+
 conexao.connect((error)=>{
     if(error){
-        console.log("A conexão do banco de dados falhou")
+        console.log("A conexão do banco de dados falhou", error)
+        console.log("HOST:", process.env.DB_HOST)
+        console.log("PORT:", process.env.DB_PORT)
     }else{
         console.log("Conexão foi bem feita")
     }
 })
+
 export default conexao
